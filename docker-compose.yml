@@ -1,0 +1,22 @@
+version: '3'
+services:
+  docs:
+    build: .
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "2020:2020"  # For preview server if needed
+    command: >
+      sh -c "npm ci && 
+      ./libdoc.sh develop &&
+      ./sitedoc.sh develop"
+    # Examples of how to override the default command:
+    # command: "./libdoc.sh master && ./sitedoc.sh"
+    # command: "./libdoc.sh 1.83.0 && ./sitedoc.sh"
+    # command: "./libdoc.sh all && ./sitedoc.sh"
+
+volumes:
+  node_modules: 
